@@ -66,12 +66,26 @@ void matrix_multiply(int rows1, int cols1, int matrix1[rows1][cols1], int rows2,
 
     for (i = 0; i < rows1; i++){
         for (j = 0; j < cols2; j++){
-            result[i][j] = matrix1[i][j] * matrix2[j][i];
+            result[i][j] = 0;
+        }
+    }
+
+    for (i = 0; i < rows1; i++){
+        for (j = 0; j < cols2; j++){
+            result[i][j] += matrix1[i][j] * matrix2[j][i];
         }
     }
 }
 
-void transpose_matrix(int rows, int cols, int matrix[rows][cols], int result[cols][rows]);
+void transpose_matrix(int rows, int cols, int matrix[rows][cols], int result[cols][rows]){
+    int i, j;
+
+    for (i = 0; i < rows; i++){
+        for (j = 0; j < cols; j++){
+            result[j][i] = matrix[i][j];
+        }
+    }
+}
 
 void scalar_multiply(int rows, int cols, int matrix[rows][cols], int scalar){
     int i, j;
