@@ -49,17 +49,14 @@ void processaOpcao(int opcao, int row1, int col1, int row2, int col2, int matrix
 
     if (opcao == 1){
         realizaSoma(row1, col1, row2, col2, matrix1, matrix2, result);
-        matrix_print(row1, col1, result);
         return;
     }
     if (opcao == 2){
         realizaSub(row1, col1, row2, col2, matrix1, matrix2, result);
-        matrix_print(row1, col1, result);
         return;
     }
     if (opcao == 3){
         realizaMult(row1, col1, matrix1, row2, col2, matrix2, resultMult);
-        matrix_print(row1, col2, resultMult);
         return;
     }
     if (opcao == 4){
@@ -82,10 +79,10 @@ void processaOpcao(int opcao, int row1, int col1, int row2, int col2, int matrix
         int result2[col2][row2];
         
         realizaTransposta(row1, col1, matrix1, result1);
-        realizaTransposta(row1, col2, matrix2, result2);
+        realizaTransposta(row2, col2, matrix2, result2);
 
-        matrix_print(row1, col1, result1);
-        matrix_print(row2, col2, result2);
+        matrix_print(col1, row1, result1);
+        matrix_print(col2, row2, result2);
     }
     if (opcao == 6){
         exit(0);
@@ -94,31 +91,34 @@ void processaOpcao(int opcao, int row1, int col1, int row2, int col2, int matrix
 
 void realizaSoma(int row1, int col1, int row2, int col2, int matrix1[row1][col1], int matrix2[row2][col2], int result[row1][col1]){
     if (possible_matrix_sum(row1, col1, row2, col2) == 0){
-        printf("Erro: as dimensoes da matriz nao correspondem \n");
+        printf("Erro: as dimensoes da matriz nao correspondem \n\n");
         return;
     }
     else{
         matrix_add(row1, col1, matrix1, row2, col2, matrix2, result);
+        matrix_print(row1, col1, result);
     }
 }
 
 void realizaSub(int row1, int col1, int row2, int col2, int matrix1[row1][col1], int matrix2[row2][col2], int result[row1][col1]){
     if (possible_matrix_sub(row1, col1, row2, col2) == 0){
-        printf("Erro: as dimensoes da matriz nao correspondem \n");
+        printf("Erro: as dimensoes da matriz nao correspondem \n\n");
         return;
     }
     else{
         matrix_sub(row1, col1, matrix1, row2, col2, matrix2, result);
+        matrix_print(row1, col1, result);
     }
 }
 
 void realizaMult(int row1, int col1, int matrix1[row1][col1], int row2, int col2, int matrix2[row2][col2], int resultMult[row1][col2]){
     if (possible_matrix_multiply(col1, row2) == 0){
-        printf("Erro: o numero de colunas da primeira matriz eh diferente do numero de linhas da segunda matriz \n");
+        printf("Erro: o numero de colunas da primeira matriz eh diferente do numero de linhas da segunda matriz \n\n");
         return;
     }
     else{
         matrix_multiply(row1, col1, matrix1, row2, col2, matrix2, resultMult);
+        matrix_print(row1, col2, resultMult);
     }
 }
 
