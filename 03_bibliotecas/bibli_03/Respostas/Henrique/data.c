@@ -111,6 +111,15 @@ int comparaData(int dia1, int mes1, int ano1, int dia2, int mes2, int ano2){
     }
 }
 
-int calculaDiasAteMes(int mes, int ano);
+int calculaDiasAteMes(int mes, int ano){
+    int mesAtual = 1;
+    int soma = 0;
+
+    for (mesAtual = 1; mesAtual < mes; mesAtual++){
+        soma += numeroDiasMes(mesAtual, ano);
+    }
+
+    return soma;
+}
 
 int calculaDiferencaDias(int dia1, int mes1, int ano1, int dia2, int mes2, int ano2);
