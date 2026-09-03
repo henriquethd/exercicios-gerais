@@ -1,4 +1,5 @@
 #include "data.h"
+#include <stdio.h>
 
 int verificaDataValida(int dia, int mes, int ano){
     if (ano < 0){
@@ -46,7 +47,7 @@ void imprimeMesExtenso(int mes){
 
 void imprimeDataExtenso(int dia, int mes, int ano){
     printf("%d de ", dia);
-    imprimeMesExtenso(dia);
+    imprimeMesExtenso(mes);
     printf(" de %d", ano);
     printf("\n");
 }
