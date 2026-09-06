@@ -11,7 +11,7 @@ int verificaDataValida(int dia, int mes, int ano){
     if (mes < 1 || mes > 12){
         return 0;
     }
-    if ((mes == 2 || mes == 4 || mes == 6 || mes == 9 || mes == 11) && (dia == 31)){
+    if (dia > numeroDiasMes(mes, ano)){
         return 0;
     }
     if (dia == 29){
@@ -19,9 +19,6 @@ int verificaDataValida(int dia, int mes, int ano){
             if (!verificaBissexto(ano)){
                 return 0;
             }
-        }
-        else{
-            return 0;
         }
     }
     return 1;
@@ -46,7 +43,7 @@ void imprimeMesExtenso(int mes){
 }
 
 void imprimeDataExtenso(int dia, int mes, int ano){
-    printf("%d de ", dia);
+    printf("%02d de ", dia);
     imprimeMesExtenso(mes);
     printf(" de %d", ano);
     printf("\n");
@@ -68,7 +65,7 @@ int verificaBissexto(int ano){
 }
 
 int numeroDiasMes(int mes, int ano){
-    if ((mes == 2 || mes == 4 || mes == 6 || mes == 9 || mes == 11)){
+    if ((mes == 4 || mes == 6 || mes == 9 || mes == 11)){
         return 30;
     }
     else if (mes == 2){
@@ -123,4 +120,42 @@ int calculaDiasAteMes(int mes, int ano){
     return soma;
 }
 
-int calculaDiferencaDias(int dia1, int mes1, int ano1, int dia2, int mes2, int ano2);
+int calculaDiferencaDias(int dia1, int mes1, int ano1, int dia2, int mes2, int ano2){
+    int diferencaDias = 0;
+    int resultComparacao = comparaData(dia1, mes1, ano1, dia2, mes2, ano2);
+
+    if (resultComparacao == -1){
+        while (comparaData(dia1, mes1, ano1, dia2, mes2, ano2) != 0){
+            diferencaDias++;
+            dia1++;
+            if (dia1 > numeroDiasMes(mes1, ano1)){
+                dia1 = 1;
+                if (mes1 != 12){
+                    mes1++;
+                }
+                else{
+                    mes1 = 1;
+                    ano1++;
+                }
+            }
+        }
+    }
+    else if (resultComparacao == 1){
+        while (comparaData(dia1, mes1, ano1, dia2, mes2, ano2) != 0){
+            diferencaDias++;
+            dia2++;
+            if (dia2 > numeroDiasMes(mes2, ano2)){
+                dia2 = 1;
+                if (mes2 != 12){
+                    mes2++;
+                }
+                else{
+                    mes2 = 1;
+                    ano2++;
+                }
+            }
+        }
+    }
+
+    return diferencaDias;
+}

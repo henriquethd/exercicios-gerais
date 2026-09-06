@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include "data.h"
 
-struct
+typedef struct
 {
     int dia, mes, ano;
-} typedef tData;
+} tData;
 
 
 int main(void){
@@ -28,19 +28,20 @@ int main(void){
     comparacao = comparaData(data1.dia, data1.mes, data1.ano, data2.dia, data2.mes, data2.ano);
 
     switch (comparacao){
-    case -1:
+    case 1:
         printf("A segunda data eh mais antiga\n");
         break;
     case 0:
         printf("As datas sao iguais\n");
         break;
-    case 1:
+    case -1:
         printf("A primeira data eh mais antiga\n");
+        break;
     default:
         exit(1);
     }
 
     printf("A diferenca em dias entre as datas eh: ");
-    printf("%2d dias\n", &calculaDiferencaDias(data1.dia, data1.mes, data1.ano, data2.dia, data2.mes, data2.anos));
+    printf("%02d dias\n", calculaDiferencaDias(data1.dia, data1.mes, data1.ano, data2.dia, data2.mes, data2.ano));
     exit(0);
 }
